@@ -19,8 +19,8 @@ import kotlin.random.Random
 
 class DownloadWorker(
     private val context: Context,
-    private val workerParameters: WorkerParameters
-): CoroutineWorker(context, workerParameters) {
+    workerParameters: WorkerParameters
+) : CoroutineWorker(context, workerParameters) {
 
 
     override suspend fun doWork(): Result {
@@ -34,7 +34,7 @@ class DownloadWorker(
                 outputStream.use { stream ->
                     try {
                         stream.write(body.bytes())
-                    } catch (e: IOException){
+                    } catch (e: IOException) {
                         return@withContext Result.failure(
                             workDataOf(
                                 WorkerKeys.ERROR_MSG to e.localizedMessage
@@ -70,7 +70,6 @@ class DownloadWorker(
     }
 
 
-
     private suspend fun startForegroundService() {
 
         setForeground(
@@ -85,8 +84,6 @@ class DownloadWorker(
         )
 
     }
-
-
 
 
 }
